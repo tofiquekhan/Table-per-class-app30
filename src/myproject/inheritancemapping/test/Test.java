@@ -26,29 +26,44 @@ public class Test {
 			StandardServiceRegistry registry = builder.build();
 			sessionFactory = cfg.buildSessionFactory(registry);
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+//			tx = session.beginTransaction();
+//			
+//			Employee emp = new Employee();
+//			emp.setPname("AAA");
+//			emp.setPaddr("IND");
+//			emp.setEid("E-111");
+//			emp.setEsal(4000);
+//			
+//			Customer cust = new Customer();
+//			cust.setPname("BBB");
+//			cust.setPaddr("BPL");
+//			cust.setCid("C-111");
+//			cust.setCmobile("7458");
+//			
+//			String epk = (String) session.save(emp);
+//			String cpk  =(String) session.save(cust);
+//			
+//			System.out.println(epk+" : Employee Pk");
+//			System.out.println(cpk +" : Customer Pk");
+//			
+//			tx.commit();
 			
-			Employee emp = new Employee();
-			emp.setPname("AAA");
-			emp.setPaddr("IND");
-			emp.setEid("E-111");
-			emp.setEsal(4000);
+			Employee emp = (Employee)session.get(Employee.class, "AAA");
+			System.out.println("---------------------------------Employee Details----------------------------------------------");
+			System.out.println(emp.getPname());
+			System.out.println(emp.getPaddr());
+			System.out.println(emp.getEid());
+			System.out.println(emp.getEsal());
+			System.out.println("---------------------------------Customer Details-----------------------------------------------");
+			Customer cust = (Customer) session.get(Customer.class, "BBB");
+			System.out.println(cust.getPname());
+			System.out.println(cust.getPaddr());
+			System.out.println(cust.getCid());
+			System.out.println(cust.getCmobile());
 			
-			Customer cust = new Customer();
-			cust.setPname("BBB");
-			cust.setPaddr("BPL");
-			cust.setCid("C-111");
-			cust.setCmobile("7458");
 			
-			String epk = (String) session.save(emp);
-			String cpk  =(String) session.save(cust);
-			
-			System.out.println(epk+" : Employee Pk");
-			System.out.println(cpk +" : Customer Pk");
-			
-			tx.commit();
 		}catch (Exception e) {
-			tx.rollback();
+//			tx.rollback();
 			e.printStackTrace();
 		}finally {
 			session.close();
